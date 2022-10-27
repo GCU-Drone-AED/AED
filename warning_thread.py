@@ -1,19 +1,16 @@
-import threading
-import time
 import winsound as sound
 
 
-def warning():
-    frequency_range = 2000
-    duration = 1000
-
-    sound.Beep(frequency_range, duration)
-
-
-class MoveWorker(threading.Thread):
+# Usage
+# ww = WarnWorker()
+# p = mp.Process(target=ww.run, name="warn")
+# p.start()
+# p.join()
+class WarnWorker:
     def __init__(self):
-        super().__init__()
+        self.frequency_range = 2000
+        self.duration = 1000
 
     def run(self):
-        warning()
+        sound.Beep(self.frequency_range, self.duration)
 
