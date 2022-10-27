@@ -1,17 +1,21 @@
-import threading
 from djitellopy import Tello
 import time
 
 
-class MoveWorker(threading.Thread):
-    def __init__(self, target_drone, speed):
-        super().__init__()
+# Usage
+# mw = MoveWorker()
+# p = mp.Process(target=mw.run, name="move", args=(target_drone, speed))
+# p.start()
+# p.join()
+class MoveWorker:
+    def __init__(self):
+        self.target_drone = None
+        self.speed = None
+
+    def run(self, target_drone, speed):
         self.target_drone = target_drone
         self.speed = speed
 
-    def run(self):
-        target_drone = self.target_drone
-        speed = self.speed
-
-        target_drone.go_xyz_speed(1, 0, 0, speed)
+        self.target_drone.go_xyz_speed(1, 0, 0, self.speed)
+        print("move forward")
         time.sleep(10)
