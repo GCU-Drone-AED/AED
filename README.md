@@ -1,5 +1,7 @@
 # ONNX YOLOv7 Object Detection
  Python scripts performing object detection using the YOLOv7 model in ONNX.
+ 
+ Tracking_QR is running drone
 
 ![! ONNX YOLOv7 Object Detection](https://github.com/ibaiGorordo/ONNX-YOLOv7-Object-Detection/blob/main/doc/img/detected_objects.jpg)
 *Original image: https://www.flickr.com/photos/nicolelee/19041780*
