@@ -1,6 +1,4 @@
-# README
-
-[![License](https://img.shields.io/npm/l/mithril.svg)](https://github.com/T3-To-The-Top/T3_To_The_Top/blob/main/License)
+[![License](https://img.shields.io/npm/l/mithril.svg)](https://github.com/GCU-Drone-AED/AED/blob/main/LICENSE)
 상태: In progress
 
 # 1. Project Intro
