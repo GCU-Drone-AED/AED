@@ -13,13 +13,15 @@
 
 ---
 
-- Tello
+- TelloPy [link](https://github.com/hanyazou/TelloPy)
 - YOLO v7 ONNX runtime source from this repo : [link](https://github.com/ibaiGorordo/ONNX-YOLOv7-Object-Detection) 
-- Python
+- Python3 
 
 # 3. Functions
 
 ---
+
+- Final results can be found inside the TrackingQR.py code.
 
 1. Tracking Human
     - Currently Drone tracking QR code to following human
@@ -28,8 +30,15 @@
     - Currently detect car (ex:car,bus,truck...) only 
     - If object detected by drone camera warning sound playing from lap-top
     - In future we're going to increase the number of detectable objects 
+    
+# 4. run
 
-# 4. Team members
+---
+- pre implement : need to download yolov7 onnx model from this [link](https://drive.google.com/file/d/16p4iHgh0sDTxjIzydHFD2YaHAiahs-bw/view)([repo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7)) and add it in model folder.
+
+- command : python trackingQR.py
+
+# 5. Team members
 
 ---
 
