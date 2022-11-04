@@ -13,4 +13,3 @@ class WarnWorker:
 
     def run(self):
         sound.Beep(self.frequency_range, self.duration)
-
