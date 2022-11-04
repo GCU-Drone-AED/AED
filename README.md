@@ -3,14 +3,13 @@
 
 # 1. Project Intro
 
----
 
 - 2022 - 2 Gachon University dept. of software Drone and Robotices Term-Project Team 1
 - It is a project about drones that help visually impaired people move
 
 # 2. Tech Stacks
 
----
+
 
 - TelloPy [link](https://github.com/hanyazou/TelloPy)
 - YOLO v7 ONNX runtime source from this repo : [link](https://github.com/ibaiGorordo/ONNX-YOLOv7-Object-Detection) 
@@ -18,7 +17,7 @@
 
 # 3. Functions
 
----
+
 
 - Final results can be found inside the Tracking_QR.py code.
 
@@ -32,14 +31,13 @@
     
 # 4. run
 
----
 - pre implement : need to download yolov7 onnx model from this [link](https://drive.google.com/file/d/16p4iHgh0sDTxjIzydHFD2YaHAiahs-bw/view)([repo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7)) and add it in model folder.
 
 - command : python tracking_QR.py
 
 # 5. Team members
 
----
+
 
 1. HAN SooMin -m4a1carbin4(WGNW_gangdodan)
 2. LEE JiHo -destiny3912
