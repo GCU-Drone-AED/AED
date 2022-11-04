@@ -3,6 +3,7 @@ import numpy as np
 from djitellopy import tello
 from YOLOv7 import YOLOv7
 import time
+import beepy as beep
 
 width = 640 
 hight = 480
@@ -12,7 +13,7 @@ deadZone = 40
 detect_width = 250
 detect_hight = 180
 
-pid = [0.3, 0.3, 0]
+pid = [0.1, 0.1, 0]
 pError = 0
 
 danger_item = [1, 2, 3, 5, 7]
@@ -52,6 +53,7 @@ class detect_warn:
 
             if (count != 0):
                 print("danger!\n")
+                beep.beep(sound=1)
             else : 
                 print("safe\n")
             return 
@@ -144,7 +146,7 @@ def trackQR(me, info, w, h, pid, pError):
         speed = 0
         error = 0
 
-    #me.send_rc_control(0, fb, ud, speed)
+    me.send_rc_control(0, fb, ud, speed)
     return error
 
 if __name__ == '__main__':
@@ -157,12 +159,12 @@ if __name__ == '__main__':
 
     me.streamon()
 
-    #me.takeoff()
-    #me.send_rc_control(0 , 0 , 25 , 0)
+    me.takeoff()
+    me.send_rc_control(0 , 0 , 25 , 0)
     time.sleep(2.2)
 
     while True:
-        time.sleep(0.2)
+        time.sleep(0.05)
         img = me.get_frame_read().frame
         img = cv2.resize(img, (width, hight))
 
