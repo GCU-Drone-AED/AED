@@ -21,7 +21,7 @@
 
 ---
 
-- Final results can be found inside the TrackingQR.py code.
+- Final results can be found inside the Tracking_QR.py code.
 
 1. Tracking Human
     - Currently Drone tracking QR code to following human
@@ -36,7 +36,7 @@
 ---
 - pre implement : need to download yolov7 onnx model from this [link](https://drive.google.com/file/d/16p4iHgh0sDTxjIzydHFD2YaHAiahs-bw/view)([repo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7)) and add it in model folder.
 
-- command : python trackingQR.py
+- command : python tracking_QR.py
 
 # 5. Team members
 
