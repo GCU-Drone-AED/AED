@@ -1,3 +1,4 @@
+#import list
 import cv2
 import numpy as np
 from djitellopy import tello
@@ -5,20 +6,27 @@ from YOLOv7 import YOLOv7
 import time
 import beepy as beep
 
+#image data
 width = 640 
 hight = 480
+
+#tracking QR Area
 fbRange = [6200, 6800]
 deadZone = 40
 
+#user danger_area data
 detect_width = 250
 detect_hight = 180
 
+#tracking QR PID 
 pid = [0.1, 0.1, 0]
 pError = 0
 
+# danger_object index
 danger_item = [1, 2, 3, 5, 7]
 count = 0
 
+# class for detecting object and check collision
 class detect_warn:
 
     def __init__(self):
@@ -30,6 +38,7 @@ class detect_warn:
         self.yolov7_detector = YOLOv7(
             self.model_path, conf_thres=0.3, iou_thres=0.5)
 
+    # collision detect and sound_warning 
     def sound_warning(self, obj, user_position):
         count = 0 
 
@@ -58,6 +67,7 @@ class detect_warn:
                 print("safe\n")
             return 
 
+    #check Image and start object detection
     def run(self, img, user_position):
 
         cv2.namedWindow("Detected Objects", cv2.WINDOW_NORMAL)
@@ -76,9 +86,12 @@ class detect_warn:
         combined_img = self.yolov7_detector.draw_detections(img)
         cv2.imshow("Detected Objects", combined_img)
 
+#find QR(user) and return QR data (position, Area)
 def findQR(img):
+    #detect QR
     det = cv2.QRCodeDetector()
     imgGray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    #get detect data.
     _, box_coordinates = det.detect(img)
 
     QR_C = []
@@ -89,6 +102,7 @@ def findQR(img):
         box_coordinates = [box_coordinates[0].astype(int)]
         nrOfbox_coordinates = len(box_coordinates[0])
 
+        # find center x,y and w,h 
         for i in range(nrOfbox_coordinates):
 
             control = i % nrOfbox_coordinates 
@@ -119,8 +133,9 @@ def findQR(img):
     else:
         return img, [[0, 0], 0]
 
-
+#Drone tracking QR
 def trackQR(me, info, w, h, pid, pError):
+    #set QR data
     area = info[1]
     x,y = info[0][0],info[0][1]
     fb = 0
@@ -130,6 +145,7 @@ def trackQR(me, info, w, h, pid, pError):
     speed = pid[0] * error + pid[1] * (error - pError)
     speed = int(np.clip(speed, -100, 100))
 
+    #move foward check
     if area > fbRange[0] and area < fbRange[1]:
         fb = 0
     elif area > fbRange[1]:
@@ -137,6 +153,7 @@ def trackQR(me, info, w, h, pid, pError):
     elif area < fbRange[0] and area != 0:
         fb = 20
 
+    #up down check
     if (y > int(h*3/4) + deadZone):
         ud = -5
     elif(y < int(h*3/4) - deadZone):
@@ -146,13 +163,15 @@ def trackQR(me, info, w, h, pid, pError):
         speed = 0
         error = 0
 
+    #send drone_command to tracking QR(USER)
     me.send_rc_control(0, fb, ud, speed)
     return error
 
 if __name__ == '__main__':
-
+    #class init
     detect_object = detect_warn()
 
+    #tello drone init
     me = tello.Tello()
     me.connect()
     print(me.get_battery())
@@ -163,6 +182,7 @@ if __name__ == '__main__':
     me.send_rc_control(0 , 0 , 25 , 0)
     time.sleep(2.2)
 
+    # keep read IMG from tello drone and tracking QR + Obejct detection
     while True:
         time.sleep(0.05)
         img = me.get_frame_read().frame
